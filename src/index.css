@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-h1 {
+h1, h3 {
   margin-left: 10px;
   /* font-family: 'WaltographRegular';  */
   font-weight: normal; 

@@ -6,11 +6,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import DateRangeSearch from './DateRangeSearch';
-import { DateRangePicker } from '@mui/x-date-pickers-pro';
-// const ariaLabel = { 'aria-label': 'description' };
 
-function SearchForm( props ){
+function DateSearchForm( props ){
   const [ searchText, setSearchText ] = useState( '' );
   const [ searchDate, setSearchDate ] = useState( '' );
   const navigate = useNavigate();
@@ -40,4 +37,4 @@ function SearchForm( props ){
   );
 }
 
-export default SearchForm;
+export default DateSearchForm;

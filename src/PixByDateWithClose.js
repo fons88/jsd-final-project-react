@@ -4,15 +4,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 // import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-// import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-// import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-
 
 const BASE_URL = 'https://api.nasa.gov/planetary/apod';
 const API_KEY = 'ck6JfRaH5OyKQUHFxZ3BpB6bmqyGt9jlHHYqb4ez';
 
-// return long date e.g. 01 January 2014
 function formatDate( strDate ){
   const monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
@@ -20,47 +15,48 @@ function formatDate( strDate ){
   const month = strDate.slice( 5, 7 );
   const date = strDate.slice( 8, 10 );
 
-  console.log( date, month, year);
+  // console.log( date, month, year);
 
   return ( `${ date } ${ monthNames[ parseInt( month ) - 1 ]} ${ year }`);
 }
 
-// main function to display single date data
-function PixByDate( props ){
+// added back button to go back to lit of date populate by date range search
+export default function PixByDateWithClose( props ){
 
   const params = useParams();
-  console.log( 'params', params );
+  // console.log( params );
 
-  // for nvigate thumbnail clicked
   const navigate = useNavigate();
 
   const [picData, setPicData] = useState( {} ); 
   const [loading, setLoading] = useState( true );
   const [error, setError] = useState( null );
 
-  // let currDate = new Date();
-  // let year = currDate.getFullYear();
-  // let month = currDate.getMonth() + 1;
-  // let date = currDate.getDate();
+  let currDate = new Date();
+  let year = currDate.getFullYear();
+  let month = currDate.getMonth() + 1;
+  let date = currDate.getDate();
 
   // console.log( 'initialData', props );
+
+  // single line function to handle click
+  const handleClick = () => navigate(`/search/${ params.start }/${ params.end }`);
 
   // How to run some code ONLY ONCE when the component
   // first appears, "first mounted on the DOM"
   useEffect( () => {
-    console.log( 'useEffect callback running!' );
-    renderPixDesc( params.query );
+    // console.log( 'useEffect callback running!' );
+    renderPixDesc( params.query, params.start, params.end );
   }, [params.query] ); 
   // second arg [] here means "once on mount"
   // to perform a new AJAX request any time
   // the date picker updates
 
-  // rendering picture and description
-  function renderPixDesc( query ){
+  function renderPixDesc( query, start, end ){
 
     setLoading( true ); // to show loading message again for subsequent searches
     setError( null ); // reset error
-    console.log( query );
+    // console.log( query );
 
     axios.get ( BASE_URL, {
       params: {
@@ -69,9 +65,9 @@ function PixByDate( props ){
       }
     })
       .then(res => {
-        console.log( 'response', res.data );
+        // console.log( 'response', res.data );
         setPicData( res.data ); // save just the object
-        console.log("data", picData  );
+        // console.log("data", picData  );
         setLoading( false ); // finished loading, stop showing loading message
       })
       .catch(err => {
@@ -79,11 +75,10 @@ function PixByDate( props ){
         setError( err ); // so we can show an error message to the user
         setLoading( false );
       });
+
   } // renderPixDesc
-  console.log('error', error)
 
   if( error ){
-    // setError (null);
     // Early return from function on error
     return <strong>There was a problem processing your search. Please try again later.</strong>;
   }
@@ -95,19 +90,10 @@ function PixByDate( props ){
       ?
       <p>Loading results...</p>
       :
-        // <DefaultPix searchDate = { `${ year }-${ month < 10 ? '0'month : month }-${date}`} />
         <div className='apod'> 
-          <Button variant="text" 
-            onClick={ () => {
-              props.updLike( 
-                { 
-                  "date": picData.date,
-                  "title": picData.title 
-                });
-            }}>
-            <ThumbUpIcon fontSize='small' />
-          </Button>
-          <h3>{ formatDate( picData.date ) } - { picData.title }</h3>  
+          <Button variant="contained" onClick={ handleClick }>Back to Search List</Button>
+          <p>{ formatDate( picData.date ) }</p>
+          <h3>{ picData.title }</h3>
           <img src={ picData.url } alt={ picData.title } />
           <figcaption>{ picData.explanation }</figcaption>
         </div>
@@ -117,4 +103,3 @@ function PixByDate( props ){
 
 }
 
-export default PixByDate;

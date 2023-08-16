@@ -19,7 +19,7 @@ function SideBar(){
           <Button />
           <Link to="/"><Button variant="text">Home</Button></Link>
           <Link to="/"><Button variant="text">Asteroids News</Button></Link>
-          <Link to="/"><Button variant="text">Favourites</Button></Link>
+          <Link to="/favourites"><Button variant="text">Favourites</Button></Link>
         </Stack>
       </Box>
     </nav>
