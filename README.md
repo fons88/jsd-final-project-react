@@ -4,9 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Live URL: https://fons88.github.io/jsd-final-project-react/
 
-The idea of this app is to let users search astronomy pictures of the day by NASA by specific date and by range of dates, and added favourite picture to Favourites.
+### The idea of this app is to let users search astronomy pictures of the day by NASA by specific date and by range of dates, and added favourite picture to Favourites.
 ---
-## Content displayed is picture and some explanation about it.
+### Content displayed is picture and some explanation about it.
 
 ### layout plan:
 ![alt text](jsd_project-plan.png)
