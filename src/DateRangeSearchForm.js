@@ -17,13 +17,19 @@ export default function DateRangeSearchForm() {
   const [ error, setError ] = useState( false );
 
   function handleSubmit(ev){
+    if( !startDate || !endDate ){
+      console.warn ('Start / end date cannot be null.');
+      setError(true);
+      return;
+    }
+
     if
     (
       startDate.$y > endDate.$y ||
       ( startDate.$y === endDate.$y && startDate.$M > endDate.$M ) ||
       ( startDate.$y === endDate.$y && startDate.$M === endDate.$M && startDate.$D > endDate.$D )
     ){
-      console.log ('start date after end date');
+      console.warn ('Start date cannot be after end date');
       setError(true);
       return;
     }
@@ -37,11 +43,11 @@ export default function DateRangeSearchForm() {
     navigate(`/search/${ startDate.$y }-${ mSt < 10 ? '0' + mSt : mSt }-${ dSt < 10 ? '0' + dSt : dSt }/${ endDate.$y }-${ mEnd < 10 ? '0' + mEnd : mEnd }-${ dEnd < 10 ? '0' + dEnd : dEnd }`);
   }
 
-  if( error ) {
-    setError(false);
-    return <strong>End date has to be after start date.</strong>;
+  // if( error ) {
+  //   setError(false);
+  //   return <strong>End date has to be after start date.</strong>;
 
-  }
+  // }
 
   return (
     <Box

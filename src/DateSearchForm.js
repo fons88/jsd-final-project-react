@@ -17,8 +17,18 @@ function DateSearchForm( props ){
   
     const m = parseInt( searchDate.$M ) + 1;
     const d = parseInt( searchDate.$D );
+
+    let date = '';
+
+    // only assign value if searchDate is not null
+    if( searchDate ){
+      date = `${ searchDate.$y}-${ m < 10 ? '0' + m : m }-${ d < 10 ? '0' + d : d }`;
+    }
+    // console.log('single date:', date);
     
-    navigate(`/search/${ searchDate.$y }-${ m < 10 ? '0' + m : m }-${ d < 10 ? '0' + d : d }`);
+    // navigate(`/search/${ searchDate.$y }-${ m < 10 ? '0' + m : m }-${ d < 10 ? '0' + d : d }`);
+
+    navigate(`/search/${ date }`);
   }
 
   return (
