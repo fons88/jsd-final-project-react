@@ -1,16 +1,20 @@
 # Astronomy Pix App
 
 Live URL: https://fons88.github.io/jsd-final-project-react/
+Repo: https://github.com/fons88/jsd-final-project-react.git
 
 ### The idea of this app is to let users search astronomy pictures of the day by NASA by specific date and by range of dates, and added favourite picture to Favourites.
 ---
 ### Content displayed is picture and some explanation about it.
 
 ### layout plan:
+
 ![alt text](jsd_project-plan.png)
 
 ### page screenshot:
+
 ![alt text](jsd_individual-pic-page-no-back-btn.png)
+
 ![alt text](jsd_search-page.png)
 ---
 ### Some technical hurdles:
